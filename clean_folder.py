@@ -5,6 +5,16 @@ from typing import List, Optional, Union
 
 
 def organize_files(folders_paths: List[str], custom_extensions: Optional[List[Union[str, None]]]) -> None:
+    """
+    Organizes files in the specified folders based on their extensions.
+
+    Parameters:
+    - folder_paths (List[str]): List of paths to folders to clean.
+    - custom_extensions (Optional[List[str]]): List of custom extensions for each folder.
+    
+    Returns:
+    - None
+    """
     for idx, folder_path in enumerate(folders_paths):
         if custom_extensions and custom_extensions[idx] is not None:
             folders = custom_extensions[idx].split()
