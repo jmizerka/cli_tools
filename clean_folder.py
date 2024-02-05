@@ -35,19 +35,24 @@ def organize_files(folders_paths: List[str], custom_extensions: Optional[List[Un
                 'code': ['.py', '.sh', '.html'],
             }
 
-        for category, extension in categories.items():
-            os.makedirs(os.path.join(folder_path, category), exist_ok=True)
+        try:
+            for category, extension in categories.items():
+                os.makedirs(os.path.join(folder_path, category), exist_ok=True)
 
-        for filename in os.listdir(folder_path):
-            file_path = os.path.join(folder_path, filename)
-            if os.path.isfile(file_path):
-                _, extension = os.path.splitext(filename)
-                extension = extension.lower()
+            for filename in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, filename)
+                if os.path.isfile(file_path):
+                    _, extension = os.path.splitext(filename)
+                    extension = extension.lower()
 
-                for category, extensions in categories.items():
-                    if extension in extensions:
-                        shutil.move(file_path, os.path.join(folder_path, category))
-                        break
+                    for category, extensions in categories.items():
+                        if extension in extensions:
+                            shutil.move(file_path, os.path.join(folder_path, category))
+                            break
+        except NotADirectoryError as e:
+            print(f"Error: {e}. Please specify directory's path\n")
+        else:
+            print(f'Folder: {folder_path} has been cleaned')
 
 
 if __name__ == "__main__":
