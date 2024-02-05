@@ -9,6 +9,10 @@ def pdf_merge(paths, output):
     - paths (list): List of input PDF file paths to be merged.
     - output (str): Output PDF file path for the merged result.
     """
+    if len(paths) < 2:
+        print("Error: At least two input paths are required for merging.")
+        return
+        
     pdf_writer = PdfWriter()
     for path in paths:
         pdf_reader = PdfReader(path)
@@ -52,8 +56,8 @@ def main():
             parser.error('--output is required for merge action')
         pdf_merge(args.input, args.output)
     elif args.action == 'split':
-        if not args.ranges:
-            parser.error('--ranges is required for split action')
+        if not args.ranges or len(args.ranges) % 2 != 0:
+            parser.error('--ranges must be a list of even length for split action')
         ranges = [(args.ranges[i], args.ranges[i + 1]) for i in range(0, len(args.ranges), 2)]
         pdf_split(args.input[0], ranges)
 
