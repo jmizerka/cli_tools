@@ -7,4 +7,4 @@ simple python command line tools
 2. manage_pdf: Split, extract and merge pdfs
 
 ## Requirements:
-    ``` pypdf ```
+    pypdf > 2.0.0
